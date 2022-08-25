@@ -1,24 +1,18 @@
-## E-commerce Template
+# MERN E-Commerce Store
 
-This is a responsive e-commerce template featuring a catalog, filters, product showcase pages, shopping cart and many other features required in an online store. It is a ready to use multi-purpose e-commerce template designed to be easily modified to fit your needs. 
+## Tech
 
-### Overview
-___
+-   React
+-   Mongo DB
+-   Node.js
 
-### Technologies
+## Project Structure
 
-+ React
-+ React Spring
-+ Node.js
-+ MongoDB
-+ Express.js
-+ SASS
-+ Bootstrap
+-   `/backend`
+    -   Contains all the necessary operations required to process data from the store and operations to send and receive data from the front end.
 
-### Licence
-___
+## How to run
 
-This software is licensed under the MIT License
-
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+-   To run both the client and the server use the command `npm run dev`
+-   To only run the server use the command `npm run server`
+-   To only run the client use the command `npm run client`
