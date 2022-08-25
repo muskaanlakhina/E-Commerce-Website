@@ -1,0 +1,18 @@
+.cart-main{
+   border: 3px rgb(196 196 196) solid;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 15px;
+}
+.w-60{
+    width: 60% !important;
+}
+
+.place-order-btn{
+    border-radius:5px;
+    font-size:18px;
+    font-weight: 600;
+    margin: 10px 0px;
+    width:100% !important;
+    color:black;
+}

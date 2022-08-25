@@ -1,0 +1,61 @@
+<%- include('../layout/header') %>
+
+<div class="container">
+  <div class="messages mx-3">
+    <% if (messages.length > 0) { %>
+    <ul>
+      <% messages.forEach( (msg) => { %>
+      <div class="alert alert-dismissible fade show w-50" role="alert">
+        <li><%= msg %></li>
+      </div>
+      <% }) %>
+    </ul>
+    <%}%>
+  </div>
+  <div class="showcase-products">
+    <div class="table-response-md my-5">
+      <table class="table">
+        <tbody>
+          <% data.forEach(products => { %>
+          <tr>
+            <td></td>
+            <td class="text-left">
+              <span>
+                <%= products.name %>
+                <span class="product-price text-muted" style="font-size: 18px">
+                  | Rs.<%= products.price%>
+                </span>
+              </span>
+              <br />
+              <span class="text-muted" style="font-size: 15px">
+                <%= products.title %></span
+              >
+            </td>
+            <td>
+              <% if (products.qty_available == 0) { %>
+                <a
+                href="#"
+                role="button"
+                class="btn btn-outline-danger w-50"
+              disabled style="cursor:not-allowed">
+                Out of Stock
+              </a>
+              <% } else{ %>
+                <a
+                href="/cart/add_to_cart?p=<%= products._id%>"
+                role="button"
+                class="btn btn-outline-warning w-50"
+              >
+                ADD TO CART
+              </a>
+              <% } %>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include('../layout/footer') %>
