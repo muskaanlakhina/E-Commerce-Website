@@ -1,0 +1,24 @@
+
+.product-title-font{
+  text-align: auto;
+  font-family: Roboto;
+  font-weight: bold;
+  text-align: center;
+}
+
+.product-h2-font{
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.product-h1-font{
+  text-align: auto;
+  font-family: Roboto;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+@media (min-width: 768px) {
+
+}

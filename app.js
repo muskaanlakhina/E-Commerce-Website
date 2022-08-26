@@ -1,48 +1,53 @@
-require("dotenv").config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-const mongoose = require("mongoose");
-const express = require("express");
+const HttpError = require('./models/http-error');
 const app = express();
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
 
-//My routes
-const authRoutes = require("./routes/auth");
-const userRoutes = require("./routes/user");
-const categoryRoutes = require("./routes/category");
-const productRoutes = require("./routes/product");
-const orderRoutes = require("./routes/order");
-const paymentBRoutes = require("./routes/paymentBRoutes");
+const productRoutes = require('./routes/product-routes');
+const usersRoutes = require('./routes/user-routes');
+const orderRoutes = require('./routes/order-routes');
+const stripeRoutes=require('./util/stripe_routes');
 
-//DB Connection
-mongoose
-  .connect(process.env.DATABASE, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
-  })
-  .then(() => {
-    console.log("DB CONNECTED");
-  });
-
-//Middlewares
+require('dotenv').config()
+//console.log(process.env);
 app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(cors());
 
-//My Routes
-app.use("/api", authRoutes);
-app.use("/api", userRoutes);
-app.use("/api", categoryRoutes);
-app.use("/api", productRoutes);
-app.use("/api", orderRoutes);
-app.use("/api", paymentBRoutes);
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
 
-//PORT
-const port = process.env.PORT || 8000;
-
-//Starting a server
-app.listen(port, () => {
-  console.log(`app is running at ${port}`);
+  next();
 });
+
+app.use('/api/product', productRoutes);
+app.use('/api/users', usersRoutes);
+app.use('/api/order', orderRoutes);
+app.use('/api/stripe',stripeRoutes);
+
+app.use((req, res, next) => {
+  const error = new HttpError('Could not find this route.', 404);
+  throw error;
+});
+
+app.use((error, req, res, next) => {
+  if (res.headerSent) {
+    return next(error);
+  }
+  res.status(error.code || 500);
+  res.json({ message: error.message || 'An unknown error occurred!' });
+});
+
+mongoose
+  .connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-d6zei.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
+  .then(() => {
+    app.listen(process.env.PORT||5000);
+  })
+  .catch(err => {
+    console.log(err);
+  });
