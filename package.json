@@ -1,33 +1,50 @@
 {
-    "name": "projbackend",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "start": "nodemon app.js"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "body-parser": "^1.19.0",
-        "braintree": "^2.24.0",
-        "cookie-parser": "^1.4.4",
-        "cors": "^2.8.5",
-        "dotenv": "^8.2.0",
-        "express": "^4.17.1",
-        "express-jwt": "^5.3.1",
-        "express-validator": "^6.2.0",
-        "formidable": "^1.2.1",
-        "i": "^0.3.6",
-        "jsonwebtoken": "^8.5.1",
-        "lodash": "^4.17.15",
-        "mongoose": "^5.7.7",
-        "morgan": "^1.9.1",
-        "npm": "^6.13.0",
-        "uuid": "^3.3.3"
-    },
-    "devDependencies": {
-        "nodemon": "^1.19.4"
-    }
+  "name": "mern-ecommerce",
+  "version": "1.0.0",
+  "description": "MERN ECommerce Website for 'AdamJee Mart'",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamza3256/MERN-eCommerce.git"
+  },
+  "keywords": [
+    "AdamJee",
+    "Mart",
+    "Muhammad",
+    "Hamza",
+    "eCommerce",
+    "MERN"
+  ],
+  "author": "Muhammad Hamza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hamza3256/MERN-eCommerce/issues"
+  },
+  "homepage": "https://github.com/hamza3256/MERN-eCommerce#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "colors": "^1.4.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.9",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.12"
+  }
 }
